@@ -1,0 +1,47 @@
+add-button{
+    background-color: aqua;
+    text-decoration-color: aliceblue;
+    padding:  3px;
+    border: none ;
+    font-size: medium;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: 0.3s;
+}
+add-button:hover{
+    backface-visibility: inherit;
+    background-color: blue;
+}
+edit-button{
+    background-color: bisque;
+    text-decoration-color: aquamarine;
+    padding:  3px;
+    border: none ;
+    font-size: medium;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: 0.3s;
+}
+edit-button:hover{
+    backface-visibility: inherit;
+    background-color: ivory;
+
+}
+add-button:hover{
+    backface-visibility: inherit;
+    background-color: blue;
+}
+delete-button{
+    background-color: red;
+    text-decoration-color: whitesmoke;
+    padding:  3px;
+    border: none ;
+    font-size: medium;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: 0.3s;
+}
+delete-button:hover{
+    backface-visibility: inherit;
+    background-color: palevioletred;
+}

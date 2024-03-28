@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todos</h1>
+<a href="{{url_for('log')}}" class="button" > login</a>
+
+    <ul>
+
+    {% for todo in todos %}
+        <li>{{ todo.title }}</li>
+        <form action="{{ url_for('edit', id=todo.id) }}" method="get">
+            <button type="submit" id="edit button">Edit</button>
+        </form>
+        <form action="{{ url_for('delete', id=todo.id) }}" method="post">
+            <button type="submit" id="delete button">Delete</button>
+        </form>
+    {% endfor %}
+    </ul>
+    <div>
+        <form action="{{ url_for('addTodo') }}" method="post">
+            <label for=" to do title">To Do Title:</label>
+            <input type="text" id=" to do title" name="title">
+            <button type="submit" id="add-button">Add</button>
+        </form>
+    </div>
+</body>
+</html>
