@@ -5,29 +5,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .heading-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #343a40;
+            padding: 20px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            margin-top: 10px;
+        }
+
+        .buttons a {
+            color: #fff;
+            background-color: #007bff;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todos {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .edit,
+        .delete {
+            margin-top: 5px;
+        }
+
+        .edit button,
+        .delete button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit button {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .edit button:hover {
+            background-color: #ffca2c;
+        }
+
+        .delete button {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .delete button:hover {
+            background-color: #c82333;
+        }
+
+        .add {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .add label {
+            font-weight: bold;
+        }
+
+        .add input[type="text"] {
+            padding: 5px;
+            margin-right: 10px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        .add button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .add button:hover {
+            background-color: #218838;
+        }
+    </style>
+
 </head>
+
 <body>
-    <h1>Todos</h1>
-<a href="{{url_for('login')}}" class="button" > login</a>
+
+    <div class="heading-text">
+        <h1>Todos</h1>
+        <div class="buttons">
+            <a href="{{url_for('signup')}}">Sign Up</a>
+            <a href="{{url_for('login')}}">Sign In</a>
+        </div>
+    </div>
 
     <ul>
-
-    {% for todo in todos %}
-        <li>{{ todo.title }}</li>
-        <form action="{{ url_for('edit', id=todo.id) }}" method="get">
-            <button type="submit" id="edit button">Edit</button>
-        </form>
-        <form action="{{ url_for('delete', id=todo.id) }}" method="post">
-            <button type="submit" id="delete button">Delete</button>
-        </form>
-    {% endfor %}
-    </ul>
-    <div>
+         <div class="add">
         <form action="{{ url_for('add_todo') }}" method="post">
-            <label for=" to do title">To Do Title:</label>
-            <input type="text" id=" to do title" name="title">
-            <button type="submit" id="add-button">Add</button>
+            <label for="todo-title">To Do Title:</label>
+            <input type="text" id="todo-title" name="title">
+            <button type="submit">Add</button>
         </form>
     </div>
+        {% for todo in todos %}
+        <div class="todos">
+            <li>{{ todo.title }}</li>
+        </div>
+        <div class="edit">
+            <form action="{{ url_for('edit', id=todo.id) }}" method="get">
+                <button type="submit">Edit</button>
+            </form>
+        </div>
+        <div class="delete">
+            <form action="{{ url_for('delete', id=todo.id) }}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </ul>
+
 </body>
+
 </html>

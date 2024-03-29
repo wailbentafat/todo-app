@@ -1,20 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_migrate import Migrate
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(10), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
 
 class Todo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(50))
     complete = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -61,16 +63,17 @@ def add_todo():
     db.session.commit()
     return redirect(url_for('index'))
 
-@app.route("/edit/<int:id>", methods=['GET', 'POST'])
-def edit(id):
-    todo = Todo.query.get_or_404(id)
+@app.route('/edit/<int:id_todo>', methods=['GET', 'POST'])
+def edit(id_todo):
+
+    todo = Todo.query.get_or_404(id_todo)
     if request.method == 'POST':
-        todo.title = request.form['title']
+        new_title = request.form['new_title']
+        todo.title = new_title
         db.session.commit()
         return redirect(url_for('index'))
-    else:
-        return render_template("edit.html", todo=todo)
 
+    return render_template('edit.html', id_todo=id_todo, todo=todo)
 @app.route("/delete/<int:id>", methods=['POST'])
 def delete(id):
     todo = Todo.query.get_or_404(id)
