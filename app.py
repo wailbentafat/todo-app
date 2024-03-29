@@ -34,8 +34,8 @@ def login():
         if user and check_password_hash(user.password_hash, password):
             return redirect(url_for('index'))
         else:
-            return render_template('login.html', erreur="Incorrect username or password")
-    return render_template('login.html')
+            return render_template('loginto.html', erreur="Incorrect username or password")
+    return render_template('loginto.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -77,6 +77,9 @@ def delete(id):
     db.session.delete(todo)
     db.session.commit()
     return redirect(url_for('index'))
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
     with app.app_context():
