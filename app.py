@@ -63,17 +63,17 @@ def add_todo():
     db.session.commit()
     return redirect(url_for('index'))
 
-@app.route('/edit/<int:id_todo>', methods=['GET', 'POST'])
-def edit(id_todo):
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
 
-    todo = Todo.query.get_or_404(id_todo)
+    todo = Todo.query.get_or_404(id)
     if request.method == 'POST':
         new_title = request.form['new_title']
         todo.title = new_title
         db.session.commit()
         return redirect(url_for('index'))
 
-    return render_template('edit.html', id_todo=id_todo, todo=todo)
+    return render_template('edit.html', id=id, todo=todo)
 @app.route("/delete/<int:id>", methods=['POST'])
 def delete(id):
     todo = Todo.query.get_or_404(id)

@@ -63,7 +63,7 @@
         <h1>Edit Todo</h1>
     </div>
     <div class="submit-form">
-        <form action="{{ url_for('edit', id_todo=id_todo) }}" method="post">
+        <form action="{{ url_for('edit', id=id) }}" method="post">
             <label for="new-title">New Title</label>
             <input type="text" id="new-title" name="new_title" value="{{ todo.title }}">
             <button type="submit" class="save">Save</button>

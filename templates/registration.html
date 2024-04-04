@@ -2,12 +2,90 @@
 <html>
 <head>
     <title>Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: cadetblue;
+            font-family: Calibri, Arial, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+         ereur{
+             text-align: center;
+             color: red;
+             background-color: #212529;
+             margin-bottom: 20px;
+         }
+        .signup {
+            background-color: black;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Modified CSS selector to target label elements inside .signup */
+        .signup label {
+            display: block;
+            margin-bottom: 10px;
+            color: #ddd;
+            box-shadow: #262527;
+            text-shadow: whitesmoke;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        /* Color change on hover */
+        .signup label:hover {
+            color: gray;
+        }
+
+        .signup input[type="text"],
+        .signup input[type="password"],
+        .signup button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            box-shadow: #262527;
+            text-shadow: whitesmoke;
+            transition: border-bottom-color;
+            transition-duration: 0.7s;
+        }
+
+        .signup button {
+            cursor: pointer;
+            background-color: cadetblue;
+            transition-duration: 1s;
+        }
+
+        .signup button:hover {
+            background-color: #5d9cec;
+        }
+    </style>
 </head>
 <body>
+
+<div class="heading-text">
     <h1>Registration</h1>
+</div>
+<div class="erreur">
     {% if erreur %}
     <p>{{ erreur }}</p>
     {% endif %}
+</div>
+<div class="signup">
     <form action="/signup" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
@@ -15,5 +93,6 @@
         <input type="password" id="password" name="password" required><br>
         <button type="submit">Sign Up</button>
     </form>
+</div>
 </body>
 </html>
