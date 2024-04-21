@@ -102,14 +102,22 @@
             color: #333333;
             font-size: 18px;
         }
-        
+
     </style>
 </head>
 <body>
     <div class="error">
-        {% if erreur %}
-        <p>{{ erreur }}</p>
-        {% endif %}
+      
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
     </div>
     <div class="login-container">
         <div class="login">

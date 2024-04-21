@@ -81,9 +81,17 @@
     <h1>Registration</h1>
 </div>
 <div class="erreur">
-    {% if erreur %}
-    <p>{{ erreur }}</p>
-    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
 </div>
 <div class="signup">
     <form action="/signup" method="POST">

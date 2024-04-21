@@ -129,7 +129,16 @@
 </head>
 
 <body>
-
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
     <div class="heading-text">
         <h1>Todos</h1>
         <div class="buttons">
@@ -161,6 +170,9 @@
             </form>
         </div>
         {% endfor %}
+        <div class="deleteall">
+            <form action="{{ url_for('deleteall', id=todo.id) }}" method="post">
+                <button type="submit">Delete</button>
     </ul>
 
 </body>
